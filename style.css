@@ -1,0 +1,9 @@
+body{
+    background-size: cover;
+    background-position: center;
+}
+#rooms{
+    background-color: rosybrown;
+    width:100%;
+    height:80%;
+}
