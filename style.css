@@ -2,8 +2,25 @@ body{
     background-size: cover;
     background-position: center;
 }
-#rooms{
+a{
+    font-size:25px !important;
+    width:400px;
+    border-radius: 120px !important;
+    color:white;
     background-color: rosybrown;
-    width:100%;
-    height:80%;
+}
+h1{
+    background-color: darksalmon;
+    height: 8%;
+    color:white;
+    box-shadow: 5px,5px,5px grey;
+}
+#back_button{
+    height: 20px;
+    width:50px;
+}
+canvas{
+    background-color: white;
+    border-color:cadetblue;
+    box-shadow: 10px,10px,10px grey;
 }

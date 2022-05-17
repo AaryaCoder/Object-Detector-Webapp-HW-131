@@ -13,6 +13,32 @@
   
   <script src="laundry.js"></script>
   <link rel="stylesheet" type="text/css" href="laundry.css">
+  <style>
+    body{
+    background-size: cover;
+    background-position: center;
+}
+canvas{
+    background-color: white;
+    border-color:cadetblue;
+    box-shadow: 10px,10px,10px grey;
+}
+h1{
+    background-color: darksalmon;
+    color:white;
+    height:8%;
+}
+#back_button{
+    background-color: rosybrown;
+    height: 20%;
+    width:40%;
+    margin-top: 20px;
+    margin-left: 10px;
+    border-radius: 20px;
+    font-size: 24px;
+    color:white;
+}
+  </style>
 </head>
 <body background="background2.jpg">
     <a id="back_button" href="index.html">⇦Back to Home</a>
@@ -22,5 +48,49 @@
         <h4>How many objects are in the image and how many were detected?</h4>
 
     </center>
+    <script>
+      objectDetector="";
+      img="";
+      status="";
+      objects=[];
+      
+      function preload(){
+          img=loadImage('laundry.jpg');
+      }
+      function setup(){
+          canvas=createCanvas(640,420);
+          canvas.center();
+          objectDetector= ml5.objectDetector('cocossd',modelLoaded);
+          document.getElementById("status").innerHTML="Status: Object Detected :)";
+      }
+      function draw(){
+          image(img,0,0,640,420);
+          if(status!=""){
+              for(i=0;1<objects.length;i++){
+                  document.getElementById("status").innerHTML="Status: Object Detected :)";
+      
+                  fill("#f76d52");
+                  percent= floor(objects[i].confidence*100);
+                  text(objects[i].label + "" + percent + "%", objects[i].x, objects[i].y);
+                  noFill();
+                  stroke("#f76d52");
+                  rect(objects[i].x, objects[i].y, objects[i].width, objects[i].height);
+              }
+          }
+          
+      }
+      function modelLoaded(){
+          console.log("Model Loaded!");
+          status=true;
+          objectDetector.detect(img,gotResult);
+      }
+      function gotResult(error,results){
+          if(error){
+              console.log(error);
+          }
+          console.log(results);
+          objects=results;
+      }
+          </script>
 </body>
 </html>
